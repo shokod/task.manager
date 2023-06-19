@@ -36,6 +36,7 @@ class TaskController extends Controller
 
   {
       $validated = $request->validated();
+      
       $task->update($validated);
       
       return new TaskResource($task);
