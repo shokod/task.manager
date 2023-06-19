@@ -15,7 +15,7 @@ class TaskController extends Controller
  
   public function index( Request $request)
   {
-    return new TaskCollection(Task::all());
+    return new TaskCollection(Task::paginate());
   }
   // return single task resource
   public function show(Request $request, Task $task)
@@ -30,6 +30,7 @@ class TaskController extends Controller
      $task = Task::create($validated);
      
      return new TaskResource($task);
+     
   }
 
   public function update(UpdateTaskRequest $request, Task $task)
@@ -42,7 +43,7 @@ class TaskController extends Controller
       return new TaskResource($task);
   }
 
-  public function delete(Request $request, Task $task)
+  public function destroy(Request $request, Task $task)
   {
     $task->delete();
 
