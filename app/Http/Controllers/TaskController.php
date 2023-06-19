@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
+use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,11 @@ class TaskController extends Controller
  
   public function index( Request $request)
   {
-    return new TaskCollection(Task::paginate());
+    $tasks = QueryBuilder::for(Task::class)
+    ->allowedFilters('is_done')
+    ->paginate();
+
+    return new TaskCollection($tasks);
   }
   // return single task resource
   public function show(Request $request, Task $task)
