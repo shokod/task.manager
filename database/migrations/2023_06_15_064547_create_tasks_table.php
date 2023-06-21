@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('progress');
             $table->boolean('is_done')->default(false);
             $table->string('comments');
+            $table->foreignId('creator_id')->constrained('users');
             $table->timestamps();
         });
     }

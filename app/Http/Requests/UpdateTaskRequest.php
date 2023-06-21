@@ -30,6 +30,7 @@ class UpdateTaskRequest extends FormRequest
             'progress'=> 'sometimes|required',
             'is_done'=> 'sometimes|boolean',
             'comments'=> 'sometimes|required',
+            "creator_id"=>'required'
         ];
     }
 }

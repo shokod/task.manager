@@ -30,6 +30,7 @@ class StoreTaskRequest extends FormRequest
             'progress'=> 'required',
             'is_done'=> 'required',
             'comments'=> 'required',
+            'creator_id'=> 'required'
         ];
     }
 }

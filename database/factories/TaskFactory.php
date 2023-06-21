@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,6 +26,7 @@ class TaskFactory extends Factory
             'progress' => $this->faker->number(),
             'is_done' => $this->faker->boolean,
             'comments' => $this->faker->text,
+            'creator_id'=>User::factory(),
             
         ];
     }
