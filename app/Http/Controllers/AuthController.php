@@ -28,4 +28,20 @@ class AuthController extends Controller
             'token_type' => 'Bearer',
         ]);
     }
+    public function register(Request $request)
+    {
+        $validated = $request->validate([
+            'name' =>'required|max:255',
+            'email' =>'required|email|unique:users,email',
+            'password' =>'required|confirmed|min:8',
+        ]);
+
+        $user = User::create($validated);
+
+        return response()->json([
+            'data'=>$user,
+            'message'=> 'Registration successful',
+            
+        ], 201);
+    }
 }

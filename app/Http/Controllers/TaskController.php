@@ -10,6 +10,7 @@ use App\Models\Task;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -35,7 +36,10 @@ class TaskController extends Controller
   public function store(StoreTaskRequest $request)
   {
      $validated = $request->validated();
+
      $task = Task::create($validated);
+
+     $task = Auth::user()->tasks()->create($validated);
      
      return new TaskResource($task);
      

@@ -23,7 +23,7 @@ class TaskFactory extends Factory
             'assigned_to' => $this->faker->word,
             'date_assigned' => $this->faker->date(),
             'due_date' => $this->faker->date(),
-            'progress' => $this->faker->number(),
+            'progress' => $this->faker->numberBetween(0, 100),
             'is_done' => $this->faker->boolean,
             'comments' => $this->faker->text,
             'creator_id'=>User::factory(),
