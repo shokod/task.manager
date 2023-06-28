@@ -22,15 +22,21 @@ class Task extends Model
         'is_done',
         'comments',
     ];
-    
+
     protected $casts =[
         'is_done'=>'boolean'
     ];
-    
+
     public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'creator_id');
     }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
+
     protected static function booted(): void
     {
         static::addGlobalScope('creator', function (Builder $builder) {

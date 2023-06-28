@@ -8,16 +8,15 @@ use App\Http\Resources\TaskCollection;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Spatie\QueryBuilder\QueryBuilder;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
- 
+
   public function index( Request $request)
   {
-    
+
     $tasks = QueryBuilder::for(Task::class)
     ->allowedFilters('is_done')
     ->defaultSort('created_at')
@@ -37,21 +36,19 @@ class TaskController extends Controller
   {
      $validated = $request->validated();
 
-     $task = Task::create($validated);
-
      $task = Auth::user()->tasks()->create($validated);
-     
+
      return new TaskResource($task);
-     
+
   }
 
   public function update(UpdateTaskRequest $request, Task $task)
 
   {
       $validated = $request->validated();
-      
+
       $task->update($validated);
-      
+
       return new TaskResource($task);
   }
 
@@ -59,6 +56,6 @@ class TaskController extends Controller
   {
     $task->delete();
 
-    return response('Record deleted successfully!'); 
+    return response('Record deleted successfully!');
   }
 }
